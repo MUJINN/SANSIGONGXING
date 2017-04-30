@@ -12,7 +12,7 @@ Enjoy learning and asking questions; being good at thinking and practising.look 
 
 <body>
 
-<table width="442" height="300" frame="hsides"><>
+<table width="442" height="300" frame="hsides">
 <tr> <td colspan="2" width="434" height="134" align="center"><a href="1/4.jpg" ><img src="1/1.png"></a></td>
 </tr>
 <tr><td height="106" colspan="3" ><a href="1/5.jpg">
