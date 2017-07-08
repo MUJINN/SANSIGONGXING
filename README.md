@@ -266,3 +266,378 @@ function hide()
 </table>
 </body>
 </html>
+基础并行程序
+/*#include<stdio.h>
+#include<mpi.h>
+int main(int argc,char *argv[])
+{
+	int size,rank,i,n,c[10],d[10],a[100],j,x;
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+n=10;
+for(i=0;i<size;i++)
+c[i]=n/size;
+x=n%size;
+for(i=0;i<x;i++)
+c[i]++;
+for(i=0;i<size;i++)
+{
+	for(j=0;j<i;j++)
+d[i]=d[i]+c[j];
+}
+for(i=0;i<n;i++)
+a[i]=i;
+if(rank==0){
+for(i=1;i<size;i++)
+MPI_Send(a+d[i],c[i],MPI_INT,i,0,MPI_COMM_WORLD);}
+else{
+MPI_Recv(a,c[rank],MPI_INT,0,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+}
+
+	for(i=0;i<c[rank];i++)
+printf("%d  ",&a);
+		MPI_Finalize();
+}*/
+/*
+#include<stdio.h>
+#include<mpi.h>
+main(int argv,char* argc[]){
+	int size,rank;
+	int n,x,a[100],c[10],d[10],i,j;
+	MPI_Init(&argv,&argc);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+
+	printf("进程号:%d\n",rank);
+	n=10;
+	for(i=0;i<size;i++)c[i]=n/size;
+	x=n%size;
+	for(i=0;i<x;i++)c[i]++;
+
+	for(i=0;i<size;i++)
+	{
+	d[i]=0;
+	for(j=0;j<i;j++)
+	d[i]+=c[j];
+	}
+
+		if(rank==0)
+		{
+			for(i=0;i<n;i++)a[i]=i;
+		
+			for(i=1;i<size;i++)
+			
+				MPI_Send(a+d[i],c[i],MPI_INT,i,0,MPI_COMM_WORLD);
+				
+			}
+		
+		else
+		{
+			MPI_Recv(a,c[rank],MPI_INT,0,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+		
+		}
+		
+	for(i=0;i<c[rank];i++)*/
+	/*
+	a[i]=rank;
+	if(rank!=0)
+	{
+	MPI_Send(a,c[rank],MPI_INT,0,0,MPI_COMM_WORLD);
+	}
+	else
+	{
+	for(i=1;i<size;i++)
+		
+	MPI_Recv(a+d[i],c[i],MPI_INT,i,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+	for(i=0;i<n;i++)
+	printf("%d",a[i]);
+	}
+
+
+	printf("%d",a[i]);
+	printf("\n");
+	MPI_Finalize();
+
+}  
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char *argv[])
+{int size,rank,a,b,i;
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+    MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	
+
+	a=rank;
+	if(rank!=0)
+	{
+	MPI_Send(&a,1,MPI_INT,0,0,MPI_COMM_WORLD);
+	}
+
+if(rank==0)
+	{
+	for(i=1;i<size;i++){
+	MPI_Recv(&b,1,MPI_INT,i,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+	printf("%d\n", b);}
+	}
+	MPI_Finalize();
+}        
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char* argv[]){
+	int size,rank,a,b;
+    MPI_Init(&argc,&argv);
+		MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	a=rank;
+	MPI_Reduce(&a,&b,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);//0进程接收a的数据进行求和运算再放到b里面
+		if(rank==0)
+			printf("%d\n",b);
+		MPI_Finalize();
+}
+
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char*argv[]){
+	int size,rank,i,a[10],b;
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	
+
+	if(rank==0){
+		for(i=0;i<size;i++)
+		a[i]=i;
+		
+	}
+	MPI_Scatter(&a,1,MPI_INT,&b,1,MPI_INT,0,MPI_COMM_WORLD);
+	
+	printf("%d:%d\n",rank,b);
+	
+	MPI_Finalize();
+
+
+}
+
+#include"stdio.h"
+#include"mpi.h"
+main(int argc,char*argv[]){
+	int size,rank,i,a[10];
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	if(rank==0){
+		for(i=0;i<size;i++)
+			a[i]=i;
+	}
+	MPI_Bcast(&a,size,MPI_INT,0,MPI_COMM_WORLD);
+	printf("%d:",rank);
+	for(i=0;i<size;i++)
+	printf("%d ",a[i]);
+	printf("\n");
+	MPI_Finalize();
+}
+
+#include"stdio.h"
+#include"mpi.h"
+main(int argc,char*argv[]){
+	int size,rank,a,i,b[10];
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+
+		a=rank;
+	//	printf("%d:%d\n",rank,a);
+	
+	MPI_Gather(&a,1,MPI_INT,&b,1,MPI_INT,0,MPI_COMM_WORLD);
+	if(rank==0)
+	
+		for(i=0;i<size;i++)
+			printf("%d:%d\n",rank,b[i]);
+
+	MPI_Finalize();
+
+}
+
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char*argv[]){
+	int size,rank,a,b;
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	a=rank;
+	MPI_Reduce(&a,&b,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD );
+	if(rank!=0)
+	printf("%d:%d\n",rank,a);
+	else
+		printf("%d:%d\n",rank,b);
+	MPI_Finalize();
+}
+
+#include<stdio.h>
+#include<mpi.h>
+void mp(int*a,int n)
+{
+	int i,t,j;
+	for(i=n;i>=2;i--)
+	{
+		for(j=0;j<i-1;j++)
+			if(a[j]<a[j+1])
+			{
+				t=a[j];a[j]=a[j+1];a[j+1]=t;
+			}
+	}
+}
+	void jo(int*a,int n)
+	{
+		int i,t,j;
+		for(i=0;i<n;i++)
+		{
+			if(i%2==0)
+			{
+				for(j=0;j<n-1;j=j+2)
+					if(a[j]<a[j+1])
+					{
+						t=a[j];a[j]=a[j+1];a[j+1]=t;
+					}
+			}
+					else
+					{
+						for(j=1;j<n-1;j=j+2)
+							if(a[j]<a[j+1])
+							{
+								t=a[j];a[j]=a[j+1];a[j+1]=t;
+							}
+					}
+			
+		}
+	
+
+	}
+main(int argv,char*argc[])
+{
+	int size,rank;
+	int a[100],b[100],i,p,n,local_n,j;
+	MPI_Init(&argv,&argc);
+
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	n=8;
+	local_n=n/size;
+	if(rank==0){
+		for(i=0;i<100;i++)
+			a[i]=i;
+	}
+	MPI_Scatter(a,local_n,MPI_INT,b,local_n,MPI_INT,0,MPI_COMM_WORLD);
+	mp(b,local_n);
+	for(i=0;i<size;i++)
+	{
+		if(i%2==0)                  //有偶数个进程时
+		{
+			if(rank%2==0)
+			{
+				p=rank+1;
+			}
+			else
+			{
+				p=rank-1;
+			}
+		}
+		else                           //有奇数个进程时
+		{
+			if(rank%2==0)
+			{
+				p=rank-1;
+			}
+			else
+			{
+				p=rank+1;
+			}
+		}
+		if(p==-1||p==size)p=MPI_PROC_NULL;
+		if(p!=MPI_PROC_NULL){
+			MPI_Send(b,local_n,MPI_INT,p,0,MPI_COMM_WORLD);
+			MPI_Recv(b+local_n,local_n,MPI_INT,p,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+			mp(b,2*local_n);
+			if(rank<p)
+			{}
+			else
+			{
+				for(j=0;j<local_n;j++)
+					b[j]=b[j+local_n];
+			}
+		}
+	}
+/*	for(i=0;i<local_n;i++)printf("%d",b[i]);
+	printf("\n");*
+	MPI_Gather(b,local_n,MPI_INT,a,local_n,MPI_INT,0,MPI_COMM_WORLD);
+	if(rank==0)
+		for(i=0;i<n;i++)printf("%d\n",a[i]);
+		printf("\n");
+		MPI_Finalize();
+}
+
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char*argv[]){
+	int size,rank;
+	char b[10];
+
+	int a=1,p;
+	MPI_Init(&argc,&argv);
+		MPI_Comm_size(MPI_COMM_WORLD,&size);
+		MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	if(rank==0){
+			p=0;
+			MPI_Pack(&a,1,MPI_INT,b,10,&p,MPI_COMM_WORLD);
+		}
+	MPI_Bcast(&p,1,MPI_INT,0,MPI_COMM_WORLD);
+		MPI_Bcast(b,p,MPI_PACKED,0,MPI_COMM_WORLD);//??????????????????????
+		
+		if(rank!=0){p=0;
+			MPI_Unpack(b,10,&p,&a,1,MPI_INT,MPI_COMM_WORLD);
+		
+		}
+		printf("%d:%d\n",rank,a);
+		MPI_Finalize();
+}
+
+*/
+
+
+
+
+
+   /*	  if(rank==0){p=0;//指针，置0使其总是指向打包缓冲区尚未使用部分的初始位置
+		MPI_Pack(&a,1,MPI_INT,buf,100,&p,MPI_COMM_WORLD);
+		MPI_Pack(&b,1,MPI_DOUBLE,buf,100,&p,MPI_COMM_WORLD);
+		}
+		MPI_Bcast(&p,1,MPI_INT,0,MPI_COMM_WORLD);
+		MPI_Bcast(buf,p,MPI_PACKED,0,MPI_COMM_WORLD);	
+		if(rank!=0)
+		{p=0;
+		
+			MPI_Unpack(buf,100,&p,&a,1,MPI_INT,MPI_COMM_WORLD);
+	    MPI_Unpack(buf,100,&p,&b,1,MPI_DOUBLE,MPI_COMM_WORLD);
+		
+		}
+		printf("%d:a=%d,b=%d\n",rank,a,b);
+		MPI_Finalize();
+}
+*/
+#include<stdio.h>
+#include<mpi.h>
+main(int argc,char*argv[]){
+	int size,rank;
+	int a[100],b;
+	MPI_Init(&argc,&argv);
+	MPI_Comm_size(MPI_COMM_WORLD,&size);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	if(rank==0)
+	for(i=0;i<100;i++)
+		a[i]=i;
+	MPI_Type_vector(50,);
+
+}
