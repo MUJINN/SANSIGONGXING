@@ -1,10 +1,11 @@
-# SANSIGONGXING
-Enjoy learning and asking questions; being good at thinking and practising.look for the old so as to learn the new.
+/**
+*# SANSIGONGXING
+*Enjoy learning and asking questions; being good at thinking and practising.look for the old so as to learn the new.
 
-This is the begining.Seed in the soil will break the darkness one day.
-
-
-多媒体技术，登录（一）
+*This is the begining.Seed in the soil will break the darkness one day.
+*大二基础课的代码，接触编程第一年
+**/
+//多媒体技术，登录（一）
 <!DOCTYPE html>
 <html>
 <head>
@@ -308,7 +309,10 @@ function hide()
 </html>
 
 
-基础并行程序
+/**
+*科目：并行云计算
+*基础并行程序
+**/
 /*#include<stdio.h>
 #include<mpi.h>
 int main(int argc,char *argv[])
@@ -683,7 +687,8 @@ main(int argc,char*argv[]){
 	MPI_Type_vector(50,);
 
 }
-汇编语言基础
+/**
+*汇编语言基础
 《微机原理》实验报告一二
 	实验目的
 	熟悉masm开发环境：
@@ -703,6 +708,7 @@ main(int argc,char*argv[]){
 	实验环境
 	Masm
 	实验内容
+**/
 	DATAS SEGMENT
 	 W DW 1111H,2222H,4444H,5555H,6666H
 	 Q DW 0
@@ -745,7 +751,8 @@ main(int argc,char*argv[]){
 	    
 	CODES ENDS
 	    END START
-	实验三
+/**
+*实验三
 1. 掌握逻辑运算指令：AND   OR    XOR    TEST指令；
 （1）将BX中的内容D8，D9两位清零，并将低八位数据设置成89H。
 （2）将AX中的内容D5，D4，D1位置1，其余位不变；
@@ -754,6 +761,7 @@ main(int argc,char*argv[]){
 注意移位指令对标志位的影响；
 3.	将寄存器AL中的内容乘以10。
 4.	代码如下：
+**/
 DATAS SEGMENT
     ;此处输入数据段代码  
 DATAS ENDS
@@ -792,7 +800,7 @@ CODES ENDS
 
 	
 	
-实验四
+/*实验四
 1.	掌握控制转移类指令：
 （1）	判断单个标志位状态：JC/JNC  JZ/JNZ  JP/JNP  JO/JNO
 将AX中存放的无符号数除以2，如果是奇数则加1后除以2；
@@ -801,6 +809,7 @@ CODES ENDS
 比较变量a、b的值，找出最大值存入变量c中。
 利用控制转移类指令实现1+2+3+…+10，将结果存入result中。
 代码：
+*/
 DATAS SEGMENT
 	a DW 0000H
 	b DW 0001H
@@ -855,9 +864,11 @@ CODES ENDS
     END START
 
 
-数据结构基础
+/*
+*数据结构基础
 1. 1.对于下列带表头结点的单链表,写出指向
    数据域为X的结点的指针移动语句,要求头指针保持不变.
+   */
 template <class T1>int List<T1>::Delete(int x)
 {	 
 	ListNode<T1>  *q,*p;
@@ -873,7 +884,7 @@ template <class T1>int List<T1>::Delete(int x)
    return 1;
 }
 
-2. 写出在无头结点的单链表的第一个结点之前插入S结点的语句.
+//2. 写出在无头结点的单链表的第一个结点之前插入S结点的语句.
 template<class q>int List<q>::Ins(q a)
 {
 ListNode<q> *s;
@@ -883,7 +894,7 @@ s->next=LB;
 LB=s;
 return 1;
 }
-3.假设有一个单链表的长度大于1,且表中无头结点，头指针为L.已知S(S≠L)为指向链表中某结点的指针,试编写算法在链表中删除指针S所指结点的前驱结点.
+//3.假设有一个单链表的长度大于1,且表中无头结点，头指针为L.已知S(S≠L)为指向链表中某结点的指针,试编写算法在链表中删除指针S所指结点的前驱结点.
 
 #include<iostream.h>
 #include<stdlib.h>
@@ -966,8 +977,9 @@ cout<<"输出被删除元素："<<endl;
 }
  
 
-1.对于下列带表头结点的单链表,写出指向
+/*1.对于下列带表头结点的单链表,写出指向
    数据域为Z的结点的指针移动语句,并且删除该结点，要求头指针保持不变。（假设链表非空，且只有一个结点数据域为Z）
+   */
 template <class T1>int List<T1>::Delete(int z)
 {	 
 	ListNode<T1>  *q,*p;
@@ -982,7 +994,7 @@ template <class T1>int List<T1>::Delete(int z)
    delete p;}
    return 1;
 }
-2.写出在无头结点的单链表的第一个结点之前插入P结点的语句.
+/*2.写出在无头结点的单链表的第一个结点之前插入P结点的语句.*/
 template<class q>int List<q>::Ins(q a)
 {
 ListNode<q> *p;
@@ -992,7 +1004,9 @@ p->next=LB;
 LB=p;
 return 1;
 }
-3.假设有一个单链表的长度大于1,且表中无头结点，头指针为LA.已知R(R≠LA)为指向链表中某结点的指针,试编写算法在链表中删除指针R所指结点。
+/**
+*3.假设有一个单链表的长度大于1,且表中无头结点，头指针为LA.已知R(R≠LA)为指向链表中某结点的指针,试编写算法在链表中删除指针R所指结点。
+	*/
 #include<iostream.h>
 #include<stdlib.h>
 template<class q>class List;
@@ -1073,7 +1087,9 @@ cout<<"输出被删除元素："<<endl;
  cout<<x1<<endl;
 }
 
-4.假设有一个单链表非空,且带头结点，头指针为L，试编写算法计算线性表的长度并输出。
+/**
+*4.假设有一个单链表非空,且带头结点，头指针为L，试编写算法计算线性表的长度并输出。
+*/
 template<class q>void List<q>::length()
 {int j=0;
 ListNode<q> *w;
@@ -1142,7 +1158,9 @@ cout<<"请输出结点长度";
 k.length();
 }
 
-2. 编写在无头结点的动态单链表上实现线性表操作INSERT(L,i,b)和DELETE(L,i)的算法，并和在带头结点的动态单链表上实现相同操作的算法进行比较．
+/**
+*2. 编写在无头结点的动态单链表上实现线性表操作INSERT(L,i,b)和DELETE(L,i)的算法，并和在带头结点的动态单链表上实现相同操作的算法进行比较．
+*/
 #include<iostream.h>
 #include<stdlib.h>
 template<class q>class List;
@@ -1247,8 +1265,9 @@ k.prnl();
 cout<<"输出被删除元素："<<endl;
  cout<<x2<<endl;
 }
-实验1      利用顺序存储结构存储线性表插入操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
-实验一
+/**
+	*实验1   利用顺序存储结构存储线性表插入操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
+实验一*/
 #include <iostream.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1313,8 +1332,8 @@ void main()
 	cin>>i>>c1>>c2>>c3>>c4;
 	L.Ins(c1,c2,c3,c4,i);
    }
-实验2      利用顺序存储结构存储线性表删除操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
-实验二
+/*实验2      利用顺序存储结构存储线性表删除操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
+实验二*/
 #include <iostream.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1398,8 +1417,8 @@ void main()
     cout<<"被删除的元素为：";
 	cout<<d1<<" "<<d2<<" "<<d3<<" "<<d4;
    }
-实验3      利用链式存储结构存储线性表插入操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
-实验三
+/*实验3      利用链式存储结构存储线性表插入操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
+实验三*/
 #include <iostream.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1483,9 +1502,9 @@ void main()
  K.Ins(j1,x1,h1,y1,z1);
  K.prnl();
 }
-实验4      利用链式存储结构存储线性表删除操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
+/*实验4      利用链式存储结构存储线性表删除操作的实现。要求数据元素为学号、姓名、成绩1、成绩2四个域。
 实验四
-
+*/
 #include <iostream.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1590,8 +1609,9 @@ void main()
  cout<<"被删除元素的学号，姓名，成绩1，成绩2为："<<endl;
  cout<<x2<<""<<h2<<" "<<y2<<" "<<z2<<endl;
 }
-实验5      利用顺序存储结构存储栈时栈抽象数据类型的实现。要求数据元素为学号、姓名、年龄、总分四个域。
+/*实验5      利用顺序存储结构存储栈时栈抽象数据类型的实现。要求数据元素为学号、姓名、年龄、总分四个域。
 实验五
+*/
 #include<iostream.h>
 #include<stdlib.h>
 #include<string.h>
@@ -1662,8 +1682,8 @@ M.push(b,y,s1,s2);
 cout<<"输出顺序栈表为"<<endl;
  M.print();
  }
-实验6      利用顺序存储结构存储队列时队列抽象数据类型的实现。要求数据元素为学号、姓名、年龄、总分四个域。
-实验六
+/*实验6      利用顺序存储结构存储队列时队列抽象数据类型的实现。要求数据元素为学号、姓名、年龄、总分四个域。
+实验六*/
 #include<iostream.h>
 #include<stdlib.h>
 #include<string.h>
@@ -1740,7 +1760,7 @@ cout<<"打印出学生人数"<<endl;
 cout<<k.getlength()<<endl;
 }
 
-实验七
+/*实验七*/
 #include <iostream.h>
 #include <stdio.h>
 #include <assert.h>
